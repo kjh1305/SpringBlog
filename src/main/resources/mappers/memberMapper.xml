@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="iducs.springboot.blog201712015.mapper.MemberMapper">
+	<insert id="create">
+		insert into m201712015
+		values(seq_m201712015.nextval,
+		       #{email}, #{pw}, #{name}, #{phone}, #{address})
+	</insert>
+
+	<select id="readList"
+		resultType="iducs.springboot.blog201712015.domain.Member">
+    <![CDATA[
+    select
+		*
+    from
+    	m201712015
+    order by id desc
+    ]]>
+	</select>
+
+	<select id="read"
+		resultType="iducs.springboot.blog201712015.domain.Member">
+		select
+			*
+		from
+		m201712015
+		where id = #{id}
+	</select>
+
+	<select id="readEmail"
+			resultType="iducs.springboot.blog201712015.domain.Member">
+		select
+			*
+		from
+			m201712015
+		where email = #{email}
+	</select>
+
+	<update id="update">
+		update m201712015
+		set email=#{email}, pw=#{pw}, name=#{name},
+		phone=#{phone}, address=#{address}
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete
+		from m201712015
+		where id = #{id}
+	</delete>
+
+	<select id="rowCnt" resultType="int">
+		select count(*) from m201712015
+	</select>
+</mapper>

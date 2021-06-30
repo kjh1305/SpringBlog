@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>jhkimblog - main index</title>
+
+  <th:block th:replace="main/index-head::header"></th:block>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:replace="main/index-nav::nav"></th:block>
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('/img/home-bg.jpg')">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h1>Blog List</h1>
+          <span class="subheading">블로그 목록</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <form th:action="@{'/blogs/list/search'}" th:method="get">
+    <div class="form-group row justify-content-left">
+      <div class="w100" style="padding-right:10px">
+        <select class="form-control form-control-sm" name="searchType">
+          <option th:selected="${searchType=='title'}" value="title">제목</option>
+          <option th:selected="${searchType=='name'}" value="name">작성자</option>
+        </select>
+      </div>
+      <div class="w300" style="padding-right:10px">
+        <input type="text" class="form-control form-control-sm" name="search" th:value="${search}">
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary" type="submit">검색</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="row">
+  <div class="col-lg-8 col-md-10 mx-auto">
+    <th:block th:unless="${session.name == null}">
+      <div class="text-right">
+        <a class="btn btn-primary float-right" th:href="@{'/blogs/create-form'}">New Post</a>
+      </div>
+    </th:block>
+    <div th:each="blog : ${blogList}">
+      <div class="post-preview">
+        <a th:href="@{'/blogs/{id}'(id=${blog.id})}">
+          <h2 class="post-title">
+            <th:block th:text="${blog.title}"></th:block>
+          </h2>
+          <h3 class="post-subtitle">
+            <th:block th:text="${blog.content}"></th:block>
+          </h3>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#"><th:block th:text="${blog.b201712015ger}"></th:block></a>
+          on <th:block th:text="${blog.reg_date_time}"></th:block></p>
+      </div>
+      <hr>
+    </div>
+    <div class="pagination">
+      <a th:href="@{'/blogs/list/search?searchType={searchType}&search={search}&page=1'(searchType=${searchType}, search=${search})}">&laquo;</a>
+      <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+        <div th:each = "pageButton : ${#numbers.sequence(start, end)}">
+          <a th:href="@{'/blogs/list/search?searchType={searchType}&search={search}&page={page}' (page = ${pageButton}, searchType=${searchType}, search=${search})}" th:text="${pageButton}"></a>
+        </div>
+      </th:block>
+      <!--      <a class="active" href="#">2</a>-->
+
+      <a th:href="@{'/blogs/list/search?searchType={searchType}&search={search}&page={page}'(page=${pagination.totalPageCnt},searchType=${searchType}, search=${search})}">&raquo;</a>
+    </div>
+    <!-- Pager
+    <div class="clearfix">
+      <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+    </div>
+    -->
+  </div>
+
+</div>
+</div>
+
+<hr>
+<!-- Footer -->
+<th:block th:replace="main/index-footer::footer"></th:block>
+<!-- Bootstrap core CSS -->
+<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom fonts for this template -->
+<link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<!-- Custom styles for this template -->
+<link href="/css/clean-blog.min.css" rel="stylesheet">
+</body>
+<style>
+  /* Pagination links */
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+
+  /* Style the active/current link */
+  .pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+
+  /* Add a grey background color on mouse-over */
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+</html>

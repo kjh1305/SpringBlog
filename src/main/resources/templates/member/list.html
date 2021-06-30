@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>blog200412000 member list - Start Bootstrap Theme</title>
+  <th:block th:replace="main/index-head::header"></th:block>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:replace="main/index-nav::nav"></th:block>
+  
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('../img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Member List</h1>
+            <span class="subheading">회원 목록</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <!--
+        <c:if test="${sessionScope.login != null}">
+        <div class="text-right">
+          <a class="btn btn-primary float-right" href="./create-form.jsp">New Post</a>
+        </div>
+        </c:if>
+        -->
+        <div th:each="member : ${memberList}" class="post-preview">
+            <h2 class="post-title">
+              <th:block th:text="${member.name}"></th:block>
+            </h2>
+            <h3 class="post-subtitle">
+              <th:block th:text="${'phone:' + member.phone + '- address:' + member.address}"></th:block>
+            </h3>
+          </a>
+          <p class="post-meta">Posted by
+            <a href="#"><span th:text="${member.email}"></span></a>
+          </p>
+          <form class="form-signin" th:action="@{'/member/' + ${member.id}}" th:method="delete">
+            <input type="hidden" name="_method" value="delete"/>
+            <div class="text-center">
+              <button class="btn btn-primary" type="submit">delete</button>
+            </div>
+          </form>
+        </div>
+        <hr>
+        </c:forEach>
+        <!-- Pager
+        <div class="clearfix">
+          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+        -->
+        <div class="pagination">
+          <a th:href="@{'/member/list?page=1'}">&laquo;</a>
+          <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+            <div th:each = "pageButton : ${#numbers.sequence(start, end)}">
+              <a th:href="@{'/member/list?page={page}' (page = ${pageButton})}" th:text="${pageButton}"></a>
+            </div>
+          </th:block>
+          <!--      <a class="active" href="#">2</a>-->
+
+          <a th:href="@{'/member/list?page={page}'(page=${pagination.totalPageCnt})}">&raquo;</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <th:block th:replace="main/index-footer::footer"></th:block>
+
+</body>
+<style>
+  /* Pagination links */
+  .pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+  }
+
+  /* Style the active/current link */
+  .pagination a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+
+  /* Add a grey background color on mouse-over */
+  .pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+</html>

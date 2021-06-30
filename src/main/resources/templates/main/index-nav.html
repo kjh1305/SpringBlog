@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/" th:if="${session.name == null}"><span th:text="${'blog201712015'}"></span></a>
+        <a class="navbar-brand" href="/" th:if="${session.name != null}" th:text="${session.name}+'님 환영합니다.'"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/blogs/list'}">Blogs</a>
+                </li>
+            <th:block th:if="${session.name == null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="../member/signup-form">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/member/signin-form'}">Sign In</a>
+                </li>
+            </th:block>
+            <th:block th:unless="${session.name == null}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/member/list'}">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/member/{id}'(id=${session.id})}">Detail</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/member/signout'}">Sign Out</a>
+                </li>
+            </th:block>
+            </ul>
+        </div>
+    </div>
+</nav>
+

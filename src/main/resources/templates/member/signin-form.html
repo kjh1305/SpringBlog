@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Comso Blog - Start Bootstrap Theme</title>
+
+    <th:block th:replace="main/index-head::header"></th:block>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:replace="main/index-nav::nav"></th:block>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../img/contact-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Sign In</h1>
+                    <span class="subheading">Input Your ID and Password</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--
+<%
+    Cookie[] cookies = request.getCookies();
+    if(cookies != null){
+        for(Cookie tempCookie : cookies){
+            if(tempCookie.getName().equals("email")){
+                request.setAttribute("cookie_id", tempCookie.getValue());
+            }
+        }
+    }
+%>
+-->
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <form th:action="@{'./signin'}" method="post" name="singinForm" id="singinForm" novalidate>
+                <th:block th:if="${cookie_id == null}">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Email</label>
+                        <input type="text" class="form-control" placeholder="Email" name="email" required data-validation-required-message="Please enter your id.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                </th:block>
+
+                <th:block th:unless="${cookie_id == null}">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>ID</label>
+                        <input type="text" class="form-control" placeholder="Email" name="email" th:value="${cookie_id}" required data-validation-required-message="Please enter your id.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                </th:block>
+
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                    <label>PW</label>
+                    <input type="password" class="form-control" placeholder="PW" name="pw" required data-validation-required-message="Please enter your pw.">
+                    <p class="help-block text-danger"></p>
+                </div>
+                </div>
+                <div class="control-group">
+                    <div class="form-group controls">
+                    <label>Remember ID</label>
+                    <input type="checkbox" name="checked" value="yes">
+                    </div>
+                </div>
+                <br>
+                <div id="success"></div>
+                <button type="submit" class="btn btn-primary" id="sendMessageButton">Sign In</button>
+            </form>
+        </div>
+    </div>
+</div>
+<hr>
+
+<!-- Footer -->
+<th:block th:replace="main/index-footer::footer"></th:block>
+
+</body>
+
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>error page</title>
+
+    <th:block th:include="@{/main/index-head}"></th:block>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:include="@{/main/index-nav}"></th:block>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../img/about-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="page-heading">
+                    <h1>Message</h1>
+                    <span class="subheading">confirm message</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto text-center">
+            <h2 class="text-center">메시지 : <th:block th:text="${message}"></th:block> </h2>
+            <a href="../" class="btn btn-link"><h4>홈으로</h4></a>
+        </div>
+    </div>
+</div>
+<hr>
+
+<!-- Footer -->
+<th:block th:include="@{/main/index-footer}"></th:block>
+
+</body>
+
+</html>

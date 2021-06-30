@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>jhkimblog - main index</title>
+
+    <th:block th:replace="main/index-head::header"></th:block>
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<th:block th:replace="main/index-nav::nav"></th:block>
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('../img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>What Why How</h1>
+                    <span class="subheading">by k j h</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<h2 class="text-center">Spring Boot + Spring Data JDBC 개발</h2>
+<hr/>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+                <h3 class="post-subtitle">
+                    DB Schema 정의
+                </h3>
+                <span class="meta">
+                    Table, Sequence, Index, Record ...
+                </span>
+            </div>
+            <hr>
+            <div class="post-preview">
+                <h3 class="post-subtitle">
+                    Model - DTO(Data Transfer Object) 정의
+                </h3>
+                <span class="meta">
+                    POJO(Plain Old Java Object), Java, Lombok (@EqualsAndHashCode, @Getter, @Setter, @ToString, @AllArgsConstructor)
+                </span>
+            </div>
+            <hr>
+            <div class="post-preview">
+                <h3 class="post-subtitle">
+                    Service 정의 (소규모인 경우 Controller가 수행)
+                </h3>
+                <span class="meta">
+                    @Service - Business Logic, Java
+                </span>
+            </div>
+            <hr>
+            <div class="post-preview">
+                <h3 class="post-subtitle">
+                    DAO(Data Access Object) 정의
+                </h3>
+                <span class="meta">
+                    @Repository - Data Access Layer, JDBC, SQL
+                </span>
+            </div>
+            <hr>
+            <div class="post-preview">
+                <h3 class="post-subtitle">
+                    Controller 정의
+                </h3>
+                <span class="meta">
+                    @Controller, @RestController, @GetMapping, @PostMapping, @PutMapping, @DeleteMapping
+                </span>
+            </div>
+            <hr>
+            <div class="post-preview">
+                <h3 class="post-subtitle">
+                    View 생성
+                </h3>
+                <span class="meta">
+                    Thymeleaf, JSP
+                </span>
+            </div>
+            <hr>
+            <!-- Pager
+            <div class="clearfix">
+                <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<!-- Footer -->
+<th:block th:replace="main/index-footer::footer"></th:block>
+
+</body>
+
+</html>
